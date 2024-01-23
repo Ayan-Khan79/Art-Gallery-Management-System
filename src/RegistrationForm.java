@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
-public class RegistrationForm extends JDialog {
+public class RegistrationForm extends JFrame {
     private JTextField tfName;
     private JTextField tfEmail;
     private JTextField tfPhone;
@@ -17,14 +17,12 @@ public class RegistrationForm extends JDialog {
     private JButton btnRegister;
     private JButton btnCancel;
     private JPanel registerPanel;
-    public RegistrationForm(JFrame parent){
-        super(parent);
+    public RegistrationForm(){
         setTitle("Create a new Account");
         setContentPane(registerPanel);
         setMinimumSize(new Dimension(1000,600));
-        setModal(true);
-        setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setBounds(200,50,400,600);
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,6 +36,13 @@ public class RegistrationForm extends JDialog {
             }
         });
         setVisible(true);
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HomePage obj=new HomePage();
+                dispose();
+            }
+        });
     }
 
     private void registerUser() {
@@ -108,7 +113,7 @@ public class RegistrationForm extends JDialog {
 }
 
     public static void main(String[] args) {
-        RegistrationForm myform=new RegistrationForm(null);
+        RegistrationForm myform=new RegistrationForm();
         User user=myform.user;
         if(user!=null){
             System.out.println("Successful Registration of:"+user.name);

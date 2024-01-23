@@ -4,21 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class LoginForm extends JDialog {
+public class LoginForm extends JFrame{
     private JPanel panel1;
     private JTextField tfEmail;
     private JPasswordField pfpassword;
     private JButton btnCancel;
     private JButton btnOK;
     private JPanel loginPanel;
-    public LoginForm(HomePage parent){
-        super(parent);
+    public LoginForm(){
+        //super(parent);
         setTitle("LOGIN");
         setContentPane(loginPanel);
         setMinimumSize(new Dimension(500,500));
-        setModal(true);
-        setLocationRelativeTo(parent);
+        //setModal(true);
+        //setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setBounds(350,100,500,400);
         btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,6 +45,13 @@ public class LoginForm extends JDialog {
         });
         setVisible(true);
 
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HomePage page=new HomePage();
+                dispose();
+            }
+        });
     }
 
     public User user;
@@ -79,7 +87,7 @@ public class LoginForm extends JDialog {
     }
 
     public static void main(String[] args) {
-        LoginForm loginForm=new LoginForm(null);
+        LoginForm loginForm=new LoginForm();
         User user=loginForm.user;
         if(user!= null){
             System.out.println("Successful Authentication of:"+user.name);
